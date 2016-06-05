@@ -10,7 +10,8 @@ body{
 .NavBar{
   border-bottom: 1px solid gray;
   width: 100%;
-  height: 80px;
+  height: 80px;/*HERE*/
+  line-height: 80px;/*HERE*/
   position: fixed;
   top: 0px;
   right: 0px;
@@ -26,14 +27,13 @@ body{
   color: rgb(255, 255, 255);
   padding: 0px;
   margin: 0px;
-  font-size: 30px;
-  line-height: 80px;
+  font-size: 220%;/*HERE*/
+
 }
 .Nav{
   height: inherit;
   float: left;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 40px;/*HERE*/
   height: 100%;
 }
 .NavBar ul{
@@ -45,23 +45,19 @@ body{
 }
 .NavBar li{
   margin-left: 0px;
-  padding-right: 60px;
+  padding-right: 40px;/*HERE*/
   float: left;
   height: 100%;
 }
-a{
-  color: rgb(255, 255, 255);
-  font-size: 110%;
-  font-weight: bold;
-}
+
 .Nav a{
-  /*border-bottom: 5px solid black;*/
+  color: rgb(255, 255, 255);
+  font-size: 110%;/*HERE*/
+  font-weight: bold;
   text-align: center;
   text-decoration: none;
   display: block;
-  height:66%;
-  width: 100px;
-  padding-top: 25%;
+  width: 100px;/*HERE*/
 }
 
 .Nav a:hover{
@@ -69,9 +65,7 @@ a{
   text-align: center;
   text-decoration: none;
   display: block;
-  height:66%;
   width: 100px;
-  padding-top: 25%;
   color: rgb(108, 172, 240);
 }
 .firstpage{
@@ -80,13 +74,34 @@ a{
   background-image: url(pic/a.jpg);
   background-size: cover;
 }
-@media (max-width: 600px) {
+@media (max-width: 800px) {
  .NavBar {
  display: none;
  }
 }
-@media (max-width: 1000px) {
+@media (max-width: 1060px) {
  .NavBar {
- display: none;
+   height: 60px;
+   line-height: 60px;
+ }
+ .logo{
+   padding-left: 50px;
+   padding-right: 50px;
+ }
+ .NavBar h1{
+   font-size: 180%;
+ }
+ .Nav{
+   padding-left: 20px;
+ }
+ .Nav li{
+   padding-right: 20px;
+ }
+ .Nav a{
+   font-size: 90%;
+   width: 90px;
+ }
+ .Nav a:hover{
+   width: 90px;
  }
 }
