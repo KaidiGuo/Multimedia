@@ -1,0 +1,92 @@
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-family:Arial;
+}
+.NavBar{
+  border-bottom: 1px solid gray;
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+.logo{
+  height: inherit;
+  float: left;
+  padding-left: 100px;
+  padding-right: 100px;
+  height: 100%;
+}
+.logo h1{
+  color: rgb(255, 255, 255);
+  padding: 0px;
+  margin: 0px;
+  font-size: 30px;
+  line-height: 80px;
+}
+.Nav{
+  height: inherit;
+  float: left;
+  padding-left: 60px;
+  padding-right: 60px;
+  height: 100%;
+}
+.NavBar ul{
+  margin-top: 0px;
+  margin-left: 0px;
+  padding-left: 0px;
+  list-style-type: none;
+  height: 100%;
+}
+.NavBar li{
+  margin-left: 0px;
+  padding-right: 60px;
+  float: left;
+  height: 100%;
+}
+a{
+  color: rgb(255, 255, 255);
+  font-size: 110%;
+  font-weight: bold;
+}
+.Nav a{
+  /*border-bottom: 5px solid black;*/
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  height:66%;
+  width: 100px;
+  padding-top: 25%;
+}
+
+.Nav a:hover{
+  border-bottom: 3px solid rgb(255, 255, 255);
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  height:66%;
+  width: 100px;
+  padding-top: 25%;
+  color: rgb(108, 172, 240);
+}
+.firstpage{
+  height: 100%;
+  width: 100%;
+  background-image: url(pic/a.jpg);
+  background-size: cover;
+}
+@media (max-width: 600px) {
+ .NavBar {
+ display: none;
+ }
+}
+@media (max-width: 1000px) {
+ .NavBar {
+ display: none;
+ }
+}
