@@ -8,11 +8,11 @@ body{
   font-family:Arial;
 }
 .NavBar{
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid white;
   width: 100%;
   height: 80px;/*HERE*/
   line-height: 80px;/*HERE*/
-  position: fixed;
+  position: absolute;
   top: 0px;
   right: 0px;
 }
@@ -61,25 +61,281 @@ body{
 }
 
 .Nav a:hover{
-  border-bottom: 3px solid rgb(255, 255, 255);
+  border-bottom: 4px solid rgb(255, 255, 255);
   text-align: center;
   text-decoration: none;
   display: block;
   width: 100px;
-  color: rgb(108, 172, 240);
+  color: rgb(66, 59, 53);
 }
+
+
+.NavBarM{
+  text-align: center;
+  position: absolute;
+  z-index: 10;
+  right: 15px;
+  top: 15px;
+  width: 40px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 30px;
+  border: 1px solid white;
+  border-radius:10px;
+  color: rgb(255, 255, 255);
+  display: none;
+}
+.NavBarM a{
+  color: white;
+  text-decoration: none;
+}
+#NavBar2{
+
+  display: none;
+}
+
+
+
+
+
 .firstpage{
   height: 100%;
   width: 100%;
-  background-image: url(pic/a.jpg);
+  background-image: url(pic/cat.jpg);
   background-size: cover;
 }
+.wellcome{
+  color: rgb(255, 255, 255);
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  margin-top: 20%;
+  margin-left: 8%;
+  line-height:300%;
+}
+.wellcome h1{
+  font-size: 220%;
+}
+.try{
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  text-align:center;
+  width: 100px;
+  border:1px solid;
+  border-radius:25px;
+}
+.try a {
+  color: rgb(249, 249, 249);
+  text-decoration: none;
+}
+
+.overtry{
+  text-align:center;
+  width: 100px;
+  text-decoration: none;
+  border:1px solid  rgb(66, 59, 53);
+  border-radius:25px;
+  background-color:  rgb(66, 59, 53);
+}
+.overtry a{
+  color: rgb(249, 249, 249);
+  text-decoration: none;
+}
+
+
+.secondpage{
+  width: inherit;
+  height: 400px;
+  background-color: white;
+}
+
+
+
+
+
+.footer{
+  width: inherit;
+  height: 300px;
+
+  background-color: rgb(66, 59, 53);
+}
+.footerlogo{
+}
+.footerlogo p{
+  border-bottom: 1px solid white;
+  width: 90%;
+  font-size: 150%;
+  color: white;
+  float: left;
+  margin-left: 5%;
+  padding-bottom: 10px;
+}
+
+.box{
+  height: 60%;
+  width: 30%;
+}
+.footerA {
+  float: left;
+  border-right: 1px solid white;
+  padding-left: 5%;
+}
+.box p{
+  color: white;
+  float: left;
+  line-height:180%;
+
+  margin-right: 20px;
+}
+.footerB{
+  float: left;
+
+}
+.footerC{
+    float: left;
+    padding-left: 2%;
+    border-left: 1px solid white;
+}
+.box{
+  font-size: 100%;
+}
+.box ul{
+  list-style-type: none;
+  margin-top: 9%;
+  padding-left: 7%;
+}
+.box a{
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+.box a:hover{
+  color: white;
+  text-decoration: none;
+
+}
+
+
+
+
+
+
+
+
+
 @media (max-width: 800px) {
- .NavBar {
+  body{
+    text-align: center;
+  }
+  .box{
+    text-align: left;
+    font-size: 50%;
+  }
+  .firstpage{
+    background-image: url(pic/cats.jpg);
+  }
+  .NavBar {
+    height: 40px;
+    line-height: 40px;
+  }
+  #NavBar2{
+    position: absolute;
+    z-index: 200;
+    left: 0; top: 0; right: 0; bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 61px;
+    width: 90%;
+    display: none;
+  }
+  .NavBar2 ul{
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    filter:"Alpha";
+    opacity:0.9;
+    list-style-type: none;
+
+  }
+  #home{
+    border-bottom: 2px solid white;
+  }
+  .NavBar2 li{
+    width: 100%;
+  }
+  .NavBar2 a{
+    display: block;
+    color: rgb(255, 255, 255);
+    font-size: 90%;/*HERE*/
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    height: 30px;
+    line-height: 30px;
+    width: 100px;/*HERE*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+  .NavBar2 a:hover{
+    color: rgb(66, 59, 53);
+    font-size:90%;/*HERE*/
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 100px;/*HERE*/
+  }
+
+
+
+
+
+
+.NavBarM{
+  display: block;
+}
+ .Nav {
  display: none;
  }
+ .firstpage{
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+
+ }
+ .wellcome{
+   position: absolute;
+   left: 0; top: 0; right: 0; bottom: 0;
+   margin-left: auto;
+   margin-right: auto;
+   padding-left: 30px;
+   padding-right: 30px;
+ }
+ .wellcome h1{
+   font-size: 100%;
+ }
+ .try{
+   margin-left: auto;
+   margin-right: auto;
+ }
+ .overtry{
+   margin-left: auto;
+   margin-right: auto;
+ }
+
 }
 @media (max-width: 1060px) {
+.firstpage{
+  background-image: url(pic/catm.jpg);
+}
  .NavBar {
    height: 60px;
    line-height: 60px;
@@ -103,5 +359,8 @@ body{
  }
  .Nav a:hover{
    width: 90px;
+ }
+ .wellcome h1{
+   font-size: 180%;
  }
 }

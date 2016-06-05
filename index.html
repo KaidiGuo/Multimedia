@@ -6,6 +6,7 @@
     <title></title>
   </head>
   <body>
+    <script type="text/javascript" src="index.js"> </script>
     <div class="NavBar">
       <div class="logo">
         <h1>Music</h1>
@@ -13,21 +14,83 @@
       <div class="Nav">
         <ul>
           <li><a href="#">Home</a></li>
-          <li><a href="#">Second</a></li>
-          <li><a href="#">Infor</a></li>
-          <li><a href="#">And</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Code</a></li>
+          <li><a href="#">Gallery</a></li>
           <li><a href="#">Contacts</a></li>
 
         </ul>
       </div>
     </div>
+    <div class="NavBarM" onclick="toggle('NavBar2')">
+      <!-- <img src="pic/go.png" /> -->
+      <a href="#">+</a>
+    </div>
+    <div class="NavBar2" id="NavBar2" >
+      <ul>
+        <li id="home"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Code</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contacts</a></li>
+      </ul>
+    </div>
+
+
+
     <div class="firstpage">
+      <div class="wellcome">
+        <h1>
+          Try to find the person <br>who share the same music taste <br>with you.
+        </h1>
+        <div  class="try" onMouseOver="this.className='overtry';" onMouseOut="this.className='try';" >
+          <a href="#">Try now</a>
+        </div>
+      </div>
 
     </div>
-    <div class="second">
+
+    <div class="secondpage">
       <p>
-        lalalalal
+
       </p>
+    </div>
+    <div class="footer">
+      <div class="footerlogo">
+        <p>
+          Music
+        </p>
+      </div>
+
+      <div class="box footerA">
+        <p>
+          For more information please contact team member.<br><br>
+            Created by: Kaidi Guo
+
+        </p>
+      </div>
+      <div class="box footerB">
+        <ul>
+          <li><a href="#">>  Site Mpa</a></li>
+          <li><a href="#">>  Team</a></li>
+          <li><a href="#">>  Support</a></li>
+          <li><a href="#">>  API</a></li>
+        </ul>
+
+      </div>
+      <div class="box footerC">
+      <p>
+        111-111-111 <br>
+        Kaidi.guo@outlook.com <br><br>
+        Copyright © 2016.Company <br>
+        name All rights reserved.
+      </p>
+
+
+
+      </div>
+
+
     </div>
 
   </body>
