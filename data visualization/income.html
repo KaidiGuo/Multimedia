@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<title>Austrian administrative units</title>
+
+<style type="text/css">
+body {
+    font-family: arial;
+    text-align: center;
+}
+.title{
+  width: 100%;
+  font-weight: bolder;
+  font-size: 200%;
+}
+.legend{
+  position: absolute;
+  top:20px;
+  left: 20px;
+  z-index: 10;
+  width: 460px;
+  height: 250px;
+  background-color:rgb(224, 224, 224);
+  border: 1px solid white;
+}
+.legend .box {
+  text-align: left;
+  width: inherit;
+  height: 25%;
+}
+.part{
+  width: 48%;
+  height: 100%;
+  float: left;
+}
+.part1{
+  width: 30%;
+}
+.box .round1{
+  position: absolute;
+  z-index: 20;
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+  margin-left: 10px;
+  border: 1px solid white;
+  border-radius: 50px;
+  background-color: #7fcb93;
+}
+.box .round2{
+  position: absolute;
+  z-index: 20;
+  height: 30px;
+  width: 30px;
+  margin: 5px;
+  margin-left: 10px;
+
+  margin-top: 10px;
+  border: 1px solid white;
+  border-radius: 50px;
+  background-color: #f7ab8b;
+}
+.box .round3{
+  position: absolute;
+  z-index: 30;
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+  margin-left: 10px;
+  margin-top: 15px;
+  border: 1px solid white;
+  border-radius: 50px;
+  background-color: #f0d19b;
+}
+.box .rec{
+  position: absolute;
+  z-index: 40;
+  width: 6px;
+  height: 30px;
+  margin: 5px;
+  margin-left: 25px;
+  border: 1px solid white;
+  background-color: rgb(215, 116, 102);
+}
+.c .rec {
+  background-color: rgb(95, 179, 116);
+}
+.box .rec1{
+  height: 20px;
+  margin-left: 22px;
+  margin-top: 5px;
+}
+.box .rec2{
+  height: 20px;
+  margin-left: 22px;
+  margin-top: 25px;
+}
+.legend p{
+  color: rgb(122, 121, 121);
+  font-size: 100%;
+  font-family: arial;
+}
+.legend .part p{
+  font-size: 80%;
+}
+
+.map {
+    position: relative;
+    width: 100%;
+    min-height: 580px;
+    border: 1px solid #dddddd;
+    background-color: #f8f8f8;
+}
+.map .place {
+    display: inline-block;
+    border: 1px solid #ffffff;
+    background-color: #a82828;
+
+    vertical-align: middle;
+    border-radius: 1000px;
+
+    position: absolute;
+}
+.map .bar{
+  background-color: rgb(10, 240, 129);
+  display: inline-block;
+  border: 1px solid #ffffff;
+  vertical-align: middle;
+
+  position: absolute;
+}
+
+.map .infor1{
+  font-size: 78%;
+  background-color: rgb(10, 240, 129);
+  display: inline-block;
+  border: 1px solid #ffffff;
+  vertical-align: middle;
+  text-align: left;
+  position: absolute;
+}
+.map .infor1 p{
+  color: rgb(255, 255, 255);
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 7px;
+  margin-bottom: auto;
+}
+</style>
+
+
+
+</head>
+<body>
+<h1 class="title">Austria income map</h1>
+<p>
+  Kaidi Guo
+</p>
+<div class="map" id="map1">
+
+<!-- Here is legend-->
+  <div class="legend">
+    <p>
+      Legend
+    </p>
+    <div class="box a" >
+      <div class="part">
+        <div class="part part1">
+          <div class="round1"></div>
+          <div class="round2"></div>
+          <div class="round3"></div>
+        </div>
+        <div class="part">
+          <p>
+            Population density
+          </p>
+        </div>
+
+      </div>
+      <div class="part">
+        <div class="part part1">
+          <div class="rec rec1">
+
+          </div>
+          <div class="round2">
+
+          </div>
+        </div>
+        <div class="part">
+          <p>
+            Income higher than national average
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box b" >
+      <div class="part">
+        <div class="part part1">
+          <div class="rec">
+          </div>
+        </div>
+        <div class="part">
+          <p>
+            Male income
+          </p>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part part1">
+          <div class="rec rec2">
+          </div>
+          <div class="round2">
+          </div>
+        </div>
+        <div class="part">
+          <p>
+            Income lower than national average
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box c" >
+      <div class="part">
+        <div class="part part1">
+          <div class="rec">
+          </div>
+        </div>
+        <div class="part">
+          <p>
+            Female income.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D3 is available from http://d3js.org/ -->
+<script src="d3.js"></script>
+<!-- our own mercator projection function -->
+<script src="mercator.js"></script>
+
+<script>
+
+var county_colors = [
+    "#7fcb93",
+    "#f7ab8b",
+    "#f0d19b",
+    "#b6b387",
+    "#6a9a89",
+    "#bbe0d4",
+    "#c9cfb7",
+    "#86c3b1",
+    "#7a749a"
+];
+
+var curcolor;//Pubic variable for store the original color of simble
+var barcolor;//Pubic variable for store the original color of bar
+
+function draw_map(data) {
+
+    var figure = document.getElementById('map1');
+
+    for (var i=0; i<data.length; i++) {
+        var place = data[i];
+
+        var area = parseFloat(place.area);
+        if (area) {
+
+            var size = Math.sqrt(area);
+
+            var population = parseInt(place.population);
+            var origincomemale = parseInt(place.income_med_m);
+            var origincomefemale = parseInt(place.income_med_f);
+            var county_code = parseInt(place.code[0]);
+            var latlng = [parseFloat(place.lat), parseFloat(place.lon)];
+            var projected = project_mercator(latlng);
+            size = 10+1.2*Math.sqrt(population / area);
+
+            //Here to creat round simbles for population density
+            var el = document.createElement('div');
+            el.className = 'place admin-' + place.code.length;
+            el.style.width = size + 'px';
+            el.style.height = size + 'px';
+            el.title = place.name;
+            el.style.backgroundColor = county_colors[county_code-1];
+            el.style.zIndex = 1000 - Math.round(size);
+            el.onmouseenter = function() {
+              if (document.getElementById(this.title)){
+                // console.log(this.title);
+                  target=document.getElementById(this.title);
+                      if (target.style.display=="block"){
+                        // console.log("from block to none");
+                          target.style.display="none";
+                      } else {
+                          target.style.display="block";
+                           curcolor = this.style.backgroundColor;
+                          this.style.backgroundColor = "rgb(90, 100, 138)";
+                          // console.log("from none to block.");
+                      }
+              }
+            }
+            el.onmouseleave = function() {
+              if (document.getElementById(this.title)){
+                // console.log(this.title);
+                  target=document.getElementById(this.title);
+                      if (target.style.display=="block"){
+                        // console.log("from block to none");
+                          target.style.display="none";
+                          this.style.backgroundColor = curcolor;
+                      } else {
+                          target.style.display="block";
+                          // console.log("from none to block.");
+                      }
+              }
+            }
+
+            // adapt mercator coordinates to our viewport
+            var pos_x = (projected[0] - 0.5250) * 50000;
+            var pos_y = (projected[1] - 0.645) * 50000;
+
+            el.style.left = (pos_x - size / 2) + "px";
+            el.style.bottom = (pos_y - size / 2) + "px";
+///////////////////////////////////////////////////////////////////////////////////
+            //Here to creat bars for male data
+            var elbmale = document.createElement('div');
+            elbmale.className =  'bar' ;
+            elbmale.style.width = '6px';
+
+            elbmale.style.height = 0.03*Math.abs(origincomemale-2318)+15 + 'px';
+            var barheight = 0.03*Math.abs(origincomemale-2318)+15;
+            elbmale.style.zIndex = 2000 - Math.round(size);
+            elbmale.title = place.name;
+            elbmale.style.backgroundColor = 'rgb(215, 116, 102)';
+
+
+            if (origincomemale>=parseInt("2318")) {
+              elbmale.style.left = (pos_x - 6) + "px";
+              elbmale.style.bottom = (pos_y+1 ) + "px";
+            }
+            if (origincomemale<parseInt("2318")) {
+              // console.log("smaller!"+origincomemale);
+              elbmale.style.left = (pos_x - 6) + "px";
+              elbmale.style.bottom = (pos_y - barheight) + "px";
+            }
+
+/////////////////////////////////////////////////////////////////////////////////////
+            //Here to creat bars for male data
+            var elbfemale = document.createElement('div');
+            elbfemale.className =  'bar' ;
+            elbfemale.style.width = '6px';
+
+            elbfemale.style.height = 0.03*Math.abs(origincomefemale-2318)+15 + 'px';
+            var barheight2 = 0.03*Math.abs(origincomefemale-2318)+15;
+            elbfemale.style.zIndex = 2000 - Math.round(size);
+            elbfemale.title = place.name;
+            elbfemale.style.backgroundColor = 'rgb(95, 179, 116)';
+
+
+            if (origincomefemale>=parseInt("2318")) {
+              elbfemale.style.left = (pos_x ) + "px";
+              elbfemale.style.bottom = (pos_y- 3 ) + "px";
+            }
+            if (origincomefemale<parseInt("2318")) {
+              // console.log("smaller!"+origincomemale);
+              elbfemale.style.left = (pos_x) + "px";
+              elbfemale.style.bottom = (pos_y - barheight2) + "px";
+            }
+
+/////////////////////////////////////////////////////////////////////////////////////
+            //Here to creat inforboxs
+            var elbmalei = document.createElement('div');
+            elbmalei.className = ' infor1' ;
+            elbmalei.id = place.name;
+            // console.log("id"+elbmalei.id);
+            // elbmalei.style.width = '15px';
+            elbmalei.style.height = '90px';
+            elbmalei.style.backgroundColor = 'rgb(90, 100, 138)';
+            elbmalei.innerHTML="<p>"+place.name+"<p>"+"<p>"+"Population: "+place.population+"<p>"+"<p>"+"Median male Income: "+origincomemale+"<p>"+"<p>"+"Median female Income: "+origincomefemale+"<p>"  ;
+            // elbmale.style.height =  '200px';
+            elbmalei.style.zIndex = 2000;
+            elbmalei.title = place.name;
+            elbmalei.style.left = (pos_x + 20) + "px";
+            elbmalei.style.bottom = (pos_y+ 10) + "px";
+            elbmalei.style.display = 'none';
+
+
+            figure.appendChild(el);
+            figure.appendChild(elbmale);
+            figure.appendChild(elbfemale);
+            figure.appendChild(elbmalei);
+        }
+    }
+}
+
+d3.csv('income-AT.csv', draw_map);
+
+</script>
+
+</body>
+
+</html>
