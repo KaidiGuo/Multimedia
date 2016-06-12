@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<head>
+<title></title>
+  <script src="http://maps.googleapis.com/maps/api/js?libraries=geometry"></script>
+
+  <style type="text/css">
+  #player{
+    /*float: left;*/
+  }
+  #map {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+      width: 512px;
+      height: 512px;
+      float: right;
+  }
+  </style>
+
+</head>
+<body>
+
+<!-- ######################################################################### -->
+<!-- TODO: set up the video player (your video ID, width / height & parameters -->
+<!-- see https://developers.google.com/youtube/player_parameters#Manual_IFrame_Embeds -->
+<!-- ######################################################################### -->
+
+<iframe id="player" width="320" height="568" src="http://www.youtube.com/embed/M7qEgRZEsag?autoplay=0&controls=1&loop=0&showinfo=0&modestbranding=1&fs=0&rel=0&playlist=M7qEgRZEsag&enablejsapi=1
+" frameborder="0" allowfullscreen>
+</iframe>
+
+<p id="timer">initializing...</p>
+
+
+<div id="map">
+</div>
+
+
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+
+var mapOptions = {
+    center: { lat: 48.213470, lng:  16.363085},//48.213470, 16.363285
+    zoom: 16
+};
+var mapEl = document.getElementById('map');
+var map = new google.maps.Map(mapEl, mapOptions);
+
+var coords = [
+  // 48.208713, 16.360163
+  // 48.213377, 16.361527
+  // 48.213637, 16.361770
+  // 48.215767, 16.366472
+    {lat: 48.213377, lng: 16.361527},
+    {lat: 48.213637, lng: 16.361770},
+    {lat: 48.215172, lng: 16.365119},
+    {lat: 48.215426, lng: 16.365732},
+    {lat: 48.215767, lng: 16.366472}
+
+];
+
+var coords1 =[
+  {lat: 48.213377, lng: 16.361527},
+  {lat: 48.213637, lng: 16.361770},
+  {lat: 48.215172, lng: 16.365119}
+];
+var coords2 =[
+  {lat: 48.215172, lng: 16.365119},
+  {lat: 48.215426, lng: 16.365732}
+
+];
+var coords3 =[
+  {lat: 48.215426, lng: 16.365732},
+  {lat: 48.215767, lng: 16.366472}
+
+];
+
+
+//
+// var path = new google.maps.Polyline({
+//     path: coords,
+//     geodesic: true,
+//     strokeColor: '#FF0000',
+//     strokeOpacity: 1.0,
+//     strokeWeight: 2,
+//     map: map
+// });
+
+var path1 = new google.maps.Polyline({
+    path: coords1,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+    map: map
+});
+
+var path2 = new google.maps.Polyline({
+    path: coords2,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+    map: map
+});
+
+var path3 = new google.maps.Polyline({
+    path: coords3,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+    map: map
+});
+
+
+
+
+var marker = new google.maps.Marker({
+    position: coords[0],
+    map: map
+});
+
+
+
+
+
+
+
+// this script uses the Youtube JS iframe API
+// see https://developers.google.com/youtube/iframe_api_reference
+
+var player = null,
+    duration = 0;
+
+var outputEl = document.getElementById("timer");
+
+// this is called once the youtube API is fully loaded
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+// this is called once the player is set up
+// we can start interacting with the player now...
+function onPlayerReady(event) {
+    outputEl.textContent = "ready";
+    // start animation
+    frame();
+}
+
+// this function is called every time the players state changes
+var startTime;
+var playertime;
+var currenttime;
+function onPlayerStateChange(event) {
+    // ############################################################
+    // TODO: you could update your page to reflect the player state
+    // ############################################################
+    if (event.data == YT.PlayerState.PLAYING) {
+        // frame();
+        console.log("playing");
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        startTime = Date.now();
+        playertime = player.getCurrentTime();
+
+        // console.log("plaer time"+time);
+    }
+    if (event.data == YT.PlayerState.PAUSED) {
+        console.log("paused");
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+    }
+    // ...
+}
+
+// our main animation function
+// will be called repeatedly after the plyaer is ready
+
+// var length = google.maps.geometry.spherical.computeLength(path.getPath().getArray());
+var length1 = google.maps.geometry.spherical.computeLength(path1.getPath().getArray());
+var length2 = google.maps.geometry.spherical.computeLength(path2.getPath().getArray());
+var length3 = google.maps.geometry.spherical.computeLength(path3.getPath().getArray());
+
+
+
+
+var pos = 0;
+var interpolator; //= gPolyInterpolator(path);
+
+
+function frame() {
+
+    var state = player.getPlayerState();
+    if (state == YT.PlayerState.PLAYING || state == YT.PlayerState.PAUSED) {
+        if (duration == 0) {
+            duration = player.getDuration();
+        }
+    //     // ############################################################
+    //     // TODO: update your animated map to reflect the video position
+    //     // ############################################################
+        outputEl.textContent = player.getCurrentTime() + " of " + duration;
+
+
+    // var time = 1000*(Date.now()-startTime)+ playertime ;
+     var time = player.getCurrentTime();
+
+
+    if (time > duration) {
+        // stop (no new animation frame is requested
+        return;
+    }
+    if (time <= 43) {
+      console.log("startTime"+startTime);
+      console.log("-time"+time);
+      console.log("playertime"+playertime);
+
+
+      // console.log("length"+length1);
+      // console.log("time small than 43="+time);
+
+      var pos = length1*time/43;
+      interpolator= gPolyInterpolator(path1);
+    }
+    else if (time<=48) {
+      var pos = (length1*(time-43)/43) - (length2*(time-43)/25);
+      // console.log("time small than 48="+time);
+
+        interpolator= gPolyInterpolator(path2);
+    }
+    else if (time<=83) {
+      var pos = 27.84909600072636;
+      // console.log("time small than 83="+time);
+
+
+    }
+    else{
+      // console.log("time bigger than 83="+time);
+
+      var pos = length3*Math.pow((time-83),2)/Math.pow(13,2);
+        interpolator= gPolyInterpolator(path3);
+
+    }
+
+
+    // var pos = length*Math.pow(time,2)/Math.pow(duration,2);
+    // console.log("length"+length);
+    // console.log("duration"+duration);
+    // console.log("time"+time);
+
+    var wherenow = interpolator(pos);
+
+    marker.setPosition(wherenow);
+
+
+    }
+    // window.requestAnimationFrame(frame);
+
+    window.requestAnimationFrame(frame);
+}
+
+
+
+// returns a function to interpolate along a google maps polyline / polygon
+function gPolyInterpolator(poly) {
+    if (!google.maps.geometry.spherical) {
+        console.error("This function requires the google.maps.geometry.spherical library!");
+        console.error("Load it as described at https://developers.google.com/maps/documentation/javascript/libraries");
+        return null;
+    }
+
+    var path = poly.getPath();
+
+    return function(distance) {
+
+        var numVertices = path.getLength();
+
+        if (distance <= 0) return path.getAt(0);
+        if (numVertices < 2) return path.getAt(0);
+
+        var distNext = 0,
+            distLast = 0;
+
+        for (var i=1; (i < numVertices && distNext < distance); i++) {
+            distLast = distNext;
+            distNext += google.maps.geometry.spherical.computeDistanceBetween(path.getAt(i), path.getAt(i-1));
+        }
+        if (distNext < distance) {
+            return path.getAt(numVertices-1);
+        }
+
+        var alpha = (distance-distLast)/(distNext-distLast);
+
+        return google.maps.geometry.spherical.interpolate(path.getAt(i-2), path.getAt(i-1), alpha);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
